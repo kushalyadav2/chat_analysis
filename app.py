@@ -5,9 +5,32 @@ from matplotlib import pyplot as plt
 import helper
 import preprocessor
 
-st.sidebar.title("Whatsapp Chat Analyzer")
+import plotly.express as px
+
+st.title("WhatsApp Chat Analyzer 😃")
+st.markdown(
+    "This app is use to analyze your WhatsApp Chat using the exported text file 📁.")
+st.sidebar.image("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSd-uZQuG3SdbaHmh7kKcJhOmxIJSaHPJIahA&s",use_column_width=True)
+st.sidebar.title("Analyze:")
+st.sidebar.markdown(
+    "This app is use to analyze your WhatsApp Chat using the exported text file 📁.")
+
+st.sidebar.markdown('<b>Kushal Yadav</b>\
+                <a href = "https://github.com/kushalyadav2/chat_analysis" ><img src = "https://img.shields.io/badge/Author-@yadavkushal-gray.svg?colorA=gray&colorB=dodgerblue&logo=github"/>\
+                <a/>', unsafe_allow_html=True)
+
+st.sidebar.markdown('**How to export chat text file?**')
+st.sidebar.text('Follow the steps 👇:')
+st.sidebar.text('1) Open the individual or group chat.')
+st.sidebar.text('2) Tap options > More > Export chat.')
+st.sidebar.text('3) Choose export without media.')
+st.sidebar.markdown('*You are all set to go 😃*.')
 
 uploaded_file = st.sidebar.file_uploader("Chose the file")
+
+st.sidebar.markdown("**Don't worry your data is not stored!**")
+st.sidebar.markdown("**feel free to use 😊.**")
+
 if uploaded_file is not None:
     bytes_data = uploaded_file.getvalue()
     data = bytes_data.decode("utf-8")
@@ -130,6 +153,15 @@ if uploaded_file is not None:
         with col1:
             st.dataframe(emoji_df)
         with col2:
-            fig, ax = plt.subplots()
-            ax.pie(emoji_df[1].head(), labels=emoji_df[0].head(), autopct="%0.2f")
-            st.pyplot(fig)
+            fig = px.pie(emoji_df, values='count', names='emoji')
+            st.plotly_chart(fig)
+
+            # fig, ax = plt.subplots()
+            # ax.pie(emoji_df[1].head(), labels=emoji_df[0].head(), autopct="%0.2f")
+            # st.pyplot(fig)
+
+
+st.sidebar.markdown(
+    "[![built with love](https://forthebadge.com/images/badges/built-with-love.svg)](https://www.linkedin.com/in/kushal-yadav-1234b9252/)")
+st.sidebar.markdown(
+    "[![smile please](https://forthebadge.com/images/badges/makes-people-smile.svg)](https://www.linkedin.com/in/kushal-yadav-1234b9252/)")
