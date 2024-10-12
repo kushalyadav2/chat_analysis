@@ -36,7 +36,10 @@ if uploaded_file is not None:
     data = bytes_data.decode("utf-8")
     df = preprocessor.preprocess(data)
 
-    st.dataframe(df)
+    # st.dataframe(df)
+
+    st.markdown(
+    "Click the Button Show Analysis 👈.")
 
     # fetch unique users
     user_list = df['users'].unique().tolist()
