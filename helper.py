@@ -28,7 +28,7 @@ def fetch_stats(selected_user, df):
 
 def most_busy_user(df):
     x = df['users'].value_counts().head()
-    df = round(df['users'].value_counts()/df.shape[0]*100, 2).reset_index().rename(columns={'index':'name', 'users':'percent'})
+    df = round(df['users'].value_counts()/df.shape[0]*100, 2).reset_index().rename(columns={'index':'users', 'users':'percentage'})
     return x, df
 
 def creates_word(selected_user, df):
@@ -94,7 +94,10 @@ def emoji_helper(selected_user, df):
     for message in df['messages']:
         emojis.extend([c for c in message if emoji.is_emoji(c)])
 
-    emoji_df = pd.DataFrame(Counter(emojis).most_common(len(Counter(emojis))))
+    emoji_counts = Counter(emojis)
+    emoji_df = pd.DataFrame(emoji_counts.items(), columns=['emoji', 'count'])
+
+    emoji_df = emoji_df.sort_values(by='count', ascending=False).reset_index(drop=True)
 
     return emoji_df
 
@@ -135,6 +138,7 @@ def activity_heatmap(selected_user, df):
     if selected_user != 'over all':
         df = df[df['users'] == selected_user]
 
+    df['period'] = pd.Categorical(df['period'], ordered=True, categories=[f"{i}-{i + 1}" for i in range(24)])
     user_heatmap = df.pivot_table(index='day_name', columns='period', values='messages', aggfunc='count').fillna(0)
 
     return user_heatmap
