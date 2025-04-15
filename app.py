@@ -10,7 +10,7 @@ import plotly.express as px
 st.title("WhatsApp Chat Analyzer 😃")
 st.markdown(
     "This app is use to analyze your WhatsApp Chat using the exported text file 📁.")
-st.sidebar.image("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSd-uZQuG3SdbaHmh7kKcJhOmxIJSaHPJIahA&s",use_column_width=True)
+st.sidebar.image("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSd-uZQuG3SdbaHmh7kKcJhOmxIJSaHPJIahA&s",use_container_width=True)
 st.sidebar.title("Analyze:")
 st.sidebar.markdown(
     "This app is use to analyze your WhatsApp Chat using the exported text file 📁.")
